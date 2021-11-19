@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -37,11 +36,11 @@ const words = {
   }
 }
 
-class Form extends Component {
-  static contextType = LanguageContext; 
-  render() {
-    const { classes } = this.props;
-    const {language, changeLang} = this.context; 
+function Form(props){
+  
+  
+    const { classes } = props;
+    const {language, changeLanguage} = useContext(LanguageContext); 
     const {email, signIn, password, remember} = words[language]; 
     return (
       <main className={classes.main}>
@@ -50,7 +49,7 @@ class Form extends Component {
             <LockOutlinedIcon />
           </Avatar>
           <Typography variant='h5'>{signIn}</Typography>
-          <Select value={language} onChange={changeLang}>
+          <Select value={language} onChange={changeLanguage}>
             <MenuItem value='english'>English</MenuItem>
             <MenuItem value='french'>French</MenuItem>
             <MenuItem value='spanish'>Spanish</MenuItem>
@@ -82,5 +81,5 @@ class Form extends Component {
       </main>
     );
   }
-}
+
 export default withStyles(styles)(Form);
